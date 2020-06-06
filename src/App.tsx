@@ -1,7 +1,15 @@
 import React from "react";
+import "./App.css";
+import { Home } from "./pages";
+import { ThemeProvider } from "styled-components";
+import { theme } from "./styles";
 
 function App() {
-  return <span>app/</span>;
+  return (
+    <ThemeProvider theme={theme}>
+      <Home />
+    </ThemeProvider>
+  );
 }
 
 export default App;

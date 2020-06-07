@@ -1,5 +1,5 @@
 import React from "react";
-import { TileLayer, Marker, Popup } from "react-leaflet";
+import { TileLayer, Marker } from "react-leaflet";
 
 import { MapWrapper } from "./styles";
 

@@ -17,7 +17,9 @@ const InputSelect: React.FC<SelectProps> = ({ name, id, options }) => {
   return (
     <SelectWrapper name={name} id={id}>
       {options.map((option) => (
-        <OptionWrapper value={option.value}>{option.description}</OptionWrapper>
+        <OptionWrapper key={option.value} value={option.value}>
+          {option.description}
+        </OptionWrapper>
       ))}
     </SelectWrapper>
   );

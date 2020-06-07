@@ -1,10 +1,11 @@
 import React from "react";
 import { FiLogIn } from "react-icons/fi";
+
+import { Header } from "../../components";
+
 import {
   HomeContainer,
   HomeContent,
-  Header,
-  LogoWrapper,
   MainWrapper,
   MainTitle,
   MainText,
@@ -12,21 +13,18 @@ import {
   ButtonIcon,
   ButtonText,
 } from "./styles";
-import { logo } from "../../assets";
 
 const Home: React.FC = () => {
   return (
     <HomeContainer>
       <HomeContent>
-        <Header>
-          <LogoWrapper src={logo} alt="ecodev" />
-        </Header>
+        <Header />
         <MainWrapper>
           <MainTitle>Seu marketplace de coleta de resíduos</MainTitle>
           <MainText>
             Ajudamos pessoas a encontraem pontos de coleta de forma eficiente.
           </MainText>
-          <ButtonWrapper href="/cadastro">
+          <ButtonWrapper to="/create-point">
             <ButtonIcon>
               <FiLogIn />
             </ButtonIcon>

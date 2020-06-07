@@ -4,6 +4,7 @@ export const colors = {
   primaryhover: "#2FB86E",
   text: "#6C6C80",
   title: "#322153",
+  placeholder: "#A0A0B2",
 
   white: "#FFFFFF",
 };
@@ -15,6 +16,12 @@ export const fontTypes = {
   text: {
     fontSize: 24,
     lineHeight: "38px",
+  },
+  formTitle: {
+    fontSize: 36,
+  },
+  formSubtitle: {
+    fontSize: 24,
   },
 };
 

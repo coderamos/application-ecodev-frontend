@@ -2,7 +2,7 @@
 
 ## About This Project
 
-This project contains just only part of the **[ECODEV PROJECT](https://github.com/coderamos/codefolio-ecodev)** application.
+This project contains just only part of the **[ECODEV PROJECT](https://github.com/coderamos/codefolio-ecodev-frontend)** application.
 
 This project was create with [Create React App](https://facebook.github.io/create-react-app/) and [TypeScript](https://www.typescriptlang.org/). You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started). To learn React, check out the [React documentation](https://reactjs.org/). To learn TypeScript, you can learn more in the [TypeScript documentation](https://www.typescriptlang.org/docs/home.html).
 

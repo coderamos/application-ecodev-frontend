@@ -1,4 +1,6 @@
 import styled, { css } from "styled-components";
+import { Link } from "react-router-dom";
+
 import { homebackground } from "../../assets";
 
 const backgroundImage = css`
@@ -25,16 +27,6 @@ export const HomeContent = styled.div`
     text-align: center;
   }
 `;
-
-export const Header = styled.header`
-  margin: 48px 0 0;
-
-  @media ${(props) => props.theme.mediaQueries.md} {
-    margin: 48px auto 0;
-  }
-`;
-
-export const LogoWrapper = styled.img``;
 
 export const MainWrapper = styled.main`
   display: flex;
@@ -63,7 +55,7 @@ export const MainText = styled.p`
   ${(props) => props.theme.fontTypes.text}
 `;
 
-export const ButtonWrapper = styled.a`
+export const ButtonWrapper = styled(Link)`
   align-items: center;
   background: ${(props) => props.theme.colors.primary};
   border-radius: 8px;

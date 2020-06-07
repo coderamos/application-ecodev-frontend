@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const CreatePointContainer = styled.div`
   margin: 0 auto;

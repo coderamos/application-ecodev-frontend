@@ -1,6 +1,14 @@
 import React from "react";
 
 import {
+  Header,
+  InputGeneric,
+  Label,
+  InputSelect,
+  Map,
+} from "../../components";
+
+import {
   CreatePointContainer,
   Form,
   FormTitle,
@@ -8,15 +16,14 @@ import {
   FormLegendWrapper,
   FormSubtitle,
   FormTextAuxiliary,
-  FieldWrapper,
   FieldGroupWrapper,
+  FieldWrapper,
   List,
   ListItemWrapper,
   ItemImage,
   ItemName,
   Button,
 } from "./styles";
-import { Header, InputGeneric, Label, InputSelect } from "../../components";
 
 const ufOptions = [
   { value: 0, description: "selecione o estado" },
@@ -65,6 +72,12 @@ const CreatePoint: React.FC = () => {
             <FormSubtitle>Endereço</FormSubtitle>
             <FormTextAuxiliary>selecione o endereço no mapa</FormTextAuxiliary>
           </FormLegendWrapper>
+
+          <Map
+            center={[-23.5116025, -46.8742023]}
+            zoom={16}
+            position={[-23.5116025, -46.8742023]}
+          />
 
           <FieldGroupWrapper>
             <FieldWrapper>

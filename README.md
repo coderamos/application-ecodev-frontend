@@ -38,6 +38,10 @@ The page will reload if you make edits. You will also see any lint errors in the
 
 > To make queries on external API's.
 
+#### [react-leaflet](https://react-leaflet.js.org/)
+
+> To use a open source map (Leaflet).
+
 #### [prop-types](https://pt-br.reactjs.org/docs/typechecking-with-proptypes.html)
 
 > To check the data types of my components.

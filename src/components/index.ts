@@ -1,3 +1,5 @@
 import Header from "./header";
+import InputGeneric from "./inputGeneric";
+import Label from "./label";
 
-export { Header };
+export { Header, InputGeneric, Label };

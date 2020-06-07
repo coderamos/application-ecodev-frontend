@@ -23,6 +23,10 @@ export const fontTypes = {
   formSubtitle: {
     fontSize: 24,
   },
+  formTextAuxiliary: {
+    fontSize: 14,
+    fontWeight: "normal",
+  },
 };
 
 export const grid = {

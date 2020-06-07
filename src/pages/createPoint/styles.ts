@@ -52,7 +52,14 @@ export const FormSubtitle = styled.h2`
   ${(props) => props.theme.fontTypes.FormSubtitle}
 `;
 
-export const FormTextAuxiliary = styled.span``;
+export const FormTextAuxiliary = styled.span`
+  color: ${(props) => props.theme.colors.text};
+  ${(props) => props.theme.fontTypes.formTextAuxiliary}
+
+  @media ${(props) => props.theme.mediaQueries.md} {
+    font-size: 12px;
+  }
+`;
 
 export const FieldGroupWrapper = styled.div`
   display: flex;
@@ -76,28 +83,4 @@ export const FieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
-`;
-
-export const Label = styled.label`
-  font-size: 14px;
-  margin-bottom: 8px;
-  color: ${(props) => props.theme.colors.text};
-`;
-
-export const Input = styled.input`
-  flex: 1;
-  background: #f0f0f5;
-  border-radius: 8px;
-  border: 0;
-  padding: 16px 24px;
-  font-size: 16px;
-  color: ${(props) => props.theme.colors.text};
-
-  &::placeholder {
-    color: ${(props) => props.theme.colors.placeholder};
-  }
-
-  &:disabled {
-    cursor: not-allowed;
-  }
 `;

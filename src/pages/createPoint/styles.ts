@@ -57,7 +57,7 @@ export const FormTextAuxiliary = styled.span`
   ${(props) => props.theme.fontTypes.formTextAuxiliary}
 
   @media ${(props) => props.theme.mediaQueries.md} {
-    font-size: 12px;
+    display: none;
   }
 `;
 
@@ -79,8 +79,72 @@ export const FieldGroupWrapper = styled.div`
 `;
 
 export const FieldWrapper = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
+  flex: 1;
   margin-bottom: 24px;
+`;
+
+export const List = styled.ul`
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  list-style: none;
+
+  @media ${(props) => props.theme.mediaQueries.md} {
+    gap: 8px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+export const ListItemWrapper = styled.li`
+  align-items: center;
+  background: #f5f5f5;
+  border-radius: 8px;
+  border: 2px solid #f5f5f5;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 180px;
+  justify-content: space-between;
+  padding: 32px 24px 16px;
+  text-align: center;
+
+  &:hover {
+    background: ${(props) => props.theme.colors.backgroundhover};
+    border: 2px solid ${(props) => props.theme.colors.primary};
+  }
+`;
+
+export const ItemImage = styled.img``;
+
+export const ItemName = styled.span`
+  align-items: center;
+  color: ${(props) => props.theme.colors.title};
+  display: flex;
+  flex: 1;
+  margin-top: 12px;
+`;
+
+export const Button = styled.button`
+  align-self: flex-end;
+  background: ${(props) => props.theme.colors.primary};
+  border-radius: 8px;
+  border: 0;
+  color: ${(props) => props.theme.colors.white};
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  height: 56px;
+  margin-top: 40px;
+  transition: background-color 0.2s;
+  width: 260px;
+
+  &:hover {
+    background: ${(props) => props.theme.colors.primaryhover};
+  }
+
+  @media ${(props) => props.theme.mediaQueries.md} {
+    width: 100%;
+  }
 `;

@@ -1,11 +1,11 @@
 export const colors = {
   background: "#F0F0F5",
+  backgroundhover: "#E1FAEC",
+  placeholder: "#A0A0B2",
   primary: "#34CB79",
   primaryhover: "#2FB86E",
   text: "#6C6C80",
   title: "#322153",
-  placeholder: "#A0A0B2",
-
   white: "#FFFFFF",
 };
 

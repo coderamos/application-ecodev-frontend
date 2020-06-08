@@ -47,6 +47,7 @@ const CreatePoint: React.FC = () => {
   const [ufs, setUfs] = useState<string[]>([]);
   const [cities, setCities] = useState<string[]>([]);
   const [selectedUf, setSelectedUf] = useState<string>("0");
+  const [selectedCity, setSelectedCity] = useState<string>("0");
 
   useEffect(() => {
     api.get("/items").then((response) => {
@@ -70,6 +71,11 @@ const CreatePoint: React.FC = () => {
     setSelectedUf(uf);
   }
 
+  function handleSelectedCity(event: ChangeEvent<HTMLSelectElement>) {
+    const city = event.target.value;
+    setSelectedCity(city);
+  }
+
   useEffect(() => {
     if (selectedUf === "0") return;
     axios
@@ -81,10 +87,6 @@ const CreatePoint: React.FC = () => {
         setCities(citiesData);
       });
   }, [selectedUf]);
-
-  console.log({ selectedUf });
-  console.log({ cities });
-  console.log(cities.length > 0);
 
   return (
     <CreatePointContainer>
@@ -148,6 +150,7 @@ const CreatePoint: React.FC = () => {
                 id="city"
                 options={cities}
                 disabled={cities.length === 0}
+                onChange={handleSelectedCity}
               />
             </FieldWrapper>
           </FieldGroupWrapper>

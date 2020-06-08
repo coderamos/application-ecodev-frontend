@@ -95,6 +95,11 @@ export const List = styled.ul`
     gap: 8px;
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .selected {
+    background: ${(props) => props.theme.colors.backgroundhover};
+    border: 2px solid ${(props) => props.theme.colors.primary};
+  }
 `;
 
 export const ListItemWrapper = styled.li`
@@ -109,11 +114,6 @@ export const ListItemWrapper = styled.li`
   justify-content: space-between;
   padding: 32px 24px 16px;
   text-align: center;
-
-  &:hover {
-    background: ${(props) => props.theme.colors.backgroundhover};
-    border: 2px solid ${(props) => props.theme.colors.primary};
-  }
 `;
 
 export const ItemImage = styled.img``;

@@ -7,6 +7,7 @@ interface InputProps {
   name: string;
   id: string;
   placeholder?: string;
+  onChange?(event: any): any;
 }
 
 const InputGeneric: React.FC<InputProps> = ({
@@ -14,9 +15,16 @@ const InputGeneric: React.FC<InputProps> = ({
   name,
   id,
   placeholder,
+  onChange,
 }) => {
   return (
-    <InputWrapper type={type} name={name} id={id} placeholder={placeholder} />
+    <InputWrapper
+      type={type}
+      name={name}
+      id={id}
+      placeholder={placeholder}
+      onChange={onChange}
+    />
   );
 };
 

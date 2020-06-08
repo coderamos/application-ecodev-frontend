@@ -7,9 +7,10 @@ import { MapWrapper } from "./styles";
 interface MapProps {
   zoom?: number;
   initialPosition?: [number, number];
+  onClick?(event: any): any;
 }
 
-const Map: React.FC<MapProps> = ({ zoom, initialPosition }) => {
+const Map: React.FC<MapProps> = ({ zoom, onClick, initialPosition }) => {
   const [selectedPosition, setSelectedPosition] = useState<[number, number]>([
     0,
     0,

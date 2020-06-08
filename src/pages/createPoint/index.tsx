@@ -1,4 +1,4 @@
-import React, { useEffect, useState, ChangeEvent } from "react";
+import React, { useEffect, useState, ChangeEvent, FormEvent } from "react";
 
 import axios from "axios";
 
@@ -54,6 +54,13 @@ const CreatePoint: React.FC = () => {
     0,
   ]);
 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    whatsapp: "",
+  });
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
@@ -88,6 +95,29 @@ const CreatePoint: React.FC = () => {
     setSelectedCity(city);
   }
 
+  function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
+    const { name, value } = event.target;
+    setFormData({ ...formData, [name]: value });
+  }
+
+  function handleSelectItem(id: number) {
+    const alreadySelected = selectedItems.findIndex((item) => item === id);
+    if (alreadySelected >= 0) {
+      const filteredItems = selectedItems.filter((item) => item !== id);
+      setSelectedItems(filteredItems);
+    } else {
+      setSelectedItems([...selectedItems, id]);
+    }
+  }
+
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+
+    const { name, email, whatsapp } = formData;
+    const uf = selectedUf;
+    const city = selectedCity;
+  }
+
   useEffect(() => {
     if (selectedUf === "0") return;
     axios
@@ -103,7 +133,7 @@ const CreatePoint: React.FC = () => {
   return (
     <CreatePointContainer>
       <Header hasBackButtom />
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <FormTitle>
           Cadastro do <br />
           ponto de coleta
@@ -115,18 +145,33 @@ const CreatePoint: React.FC = () => {
 
           <FieldWrapper>
             <Label htmlFor="name">nome da entidade</Label>
-            <InputGeneric type="text" name="name" id="name" />
+            <InputGeneric
+              type="text"
+              name="name"
+              id="name"
+              onChange={handleInputChange}
+            />
           </FieldWrapper>
 
           <FieldGroupWrapper>
             <FieldWrapper>
               <Label htmlFor="email">e-mail</Label>
-              <InputGeneric type="email" name="email" id="email" />
+              <InputGeneric
+                type="email"
+                name="email"
+                id="email"
+                onChange={handleInputChange}
+              />
             </FieldWrapper>
 
             <FieldWrapper>
               <Label htmlFor="whatsapp">whatsapp</Label>
-              <InputGeneric type="text" name="whatsapp" id="whatsapp" />
+              <InputGeneric
+                type="text"
+                name="whatsapp"
+                id="whatsapp"
+                onChange={handleInputChange}
+              />
             </FieldWrapper>
           </FieldGroupWrapper>
         </FormFieldset>
@@ -174,7 +219,11 @@ const CreatePoint: React.FC = () => {
           <List>
             {items &&
               items.map((item) => (
-                <ListItemWrapper key={item.id}>
+                <ListItemWrapper
+                  key={item.id}
+                  onClick={() => handleSelectItem(item.id)}
+                  className={selectedItems.includes(item.id) ? "selected" : ""}
+                >
                   <ItemImage src={item.image_url} alt={item.title} />
                   <ItemName>{item.title}</ItemName>
                 </ListItemWrapper>

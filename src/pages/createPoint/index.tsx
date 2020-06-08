@@ -1,5 +1,5 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent } from "react";
-
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { LeafletMouseEvent } from "leaflet";
 
@@ -66,6 +66,8 @@ const CreatePoint: React.FC = () => {
   });
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
+  const history = useHistory();
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
@@ -119,12 +121,32 @@ const CreatePoint: React.FC = () => {
     }
   }
 
-  function handleSubmit(event: FormEvent) {
+  async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
     const { name, email, whatsapp } = formData;
     const uf = selectedUf;
     const city = selectedCity;
+    const [latitude, longitude] = selectedPosition;
+    const items = selectedItems;
+
+    const data = {
+      name,
+      email,
+      whatsapp,
+      uf,
+      city,
+      latitude,
+      longitude,
+      items,
+    };
+
+    await api.post("/points", data);
+
+    console.log(data);
+    alert("PONTO DE COLETA CRIADO!");
+
+    history.push("/");
   }
 
   useEffect(() => {

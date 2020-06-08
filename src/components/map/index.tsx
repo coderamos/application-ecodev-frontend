@@ -1,35 +1,29 @@
 import React, { useState } from "react";
 import { TileLayer, Marker } from "react-leaflet";
-import { LeafletMouseEvent } from "leaflet";
 
 import { MapWrapper } from "./styles";
 
 interface MapProps {
   zoom?: number;
   initialPosition?: [number, number];
+  selectedPosition?: [number, number];
+
   onClick?(event: any): any;
 }
 
-const Map: React.FC<MapProps> = ({ zoom, onClick, initialPosition }) => {
-  const [selectedPosition, setSelectedPosition] = useState<[number, number]>([
-    0,
-    0,
-  ]);
-  const [markerPositionLatitude, markerPositionLongitude] = selectedPosition;
-
-  function handleMapClick(event: LeafletMouseEvent) {
-    setSelectedPosition([event.latlng.lat, event.latlng.lng]);
-  }
-
+const Map: React.FC<MapProps> = ({
+  zoom,
+  initialPosition,
+  selectedPosition,
+  onClick,
+}) => {
   return (
-    <MapWrapper center={initialPosition} zoom={zoom} onclick={handleMapClick}>
+    <MapWrapper center={initialPosition} zoom={zoom} onclick={onClick}>
       <TileLayer
         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {markerPositionLatitude !== 0 && markerPositionLongitude !== 0 && (
-        <Marker position={selectedPosition} />
-      )}
+      {selectedPosition && <Marker position={selectedPosition} />}
     </MapWrapper>
   );
 };

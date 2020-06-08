@@ -1,6 +1,7 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent } from "react";
 
 import axios from "axios";
+import { LeafletMouseEvent } from "leaflet";
 
 import api from "../../services/api";
 
@@ -53,6 +54,10 @@ const CreatePoint: React.FC = () => {
     0,
     0,
   ]);
+  const [selectedPosition, setSelectedPosition] = useState<[number, number]>([
+    0,
+    0,
+  ]);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -98,6 +103,10 @@ const CreatePoint: React.FC = () => {
   function handleInputChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
+  }
+
+  function handleMapClick(event: LeafletMouseEvent) {
+    setSelectedPosition([event.latlng.lat, event.latlng.lng]);
   }
 
   function handleSelectItem(id: number) {
@@ -182,7 +191,12 @@ const CreatePoint: React.FC = () => {
             <FormTextAuxiliary>selecione o endereço no mapa</FormTextAuxiliary>
           </FormLegendWrapper>
 
-          <Map zoom={16} initialPosition={initialPosition} />
+          <Map
+            zoom={16}
+            initialPosition={initialPosition}
+            onClick={handleMapClick}
+            selectedPosition={selectedPosition}
+          />
 
           <FieldGroupWrapper>
             <FieldWrapper>

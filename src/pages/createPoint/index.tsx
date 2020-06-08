@@ -1,6 +1,8 @@
 import React, { useEffect, useState, ChangeEvent } from "react";
 
 import axios from "axios";
+import { LeafletMouseEvent } from "leaflet";
+
 import api from "../../services/api";
 
 import {
@@ -48,6 +50,10 @@ const CreatePoint: React.FC = () => {
   const [cities, setCities] = useState<string[]>([]);
   const [selectedUf, setSelectedUf] = useState<string>("0");
   const [selectedCity, setSelectedCity] = useState<string>("0");
+  const [selectedPosition, setSelectedPosition] = useState<[number, number]>([
+    0,
+    0,
+  ]);
 
   useEffect(() => {
     api.get("/items").then((response) => {
@@ -74,6 +80,10 @@ const CreatePoint: React.FC = () => {
   function handleSelectedCity(event: ChangeEvent<HTMLSelectElement>) {
     const city = event.target.value;
     setSelectedCity(city);
+  }
+
+  function handleMapClick(event: LeafletMouseEvent) {
+    setSelectedPosition([event.latlng.lat, event.latlng.lng]);
   }
 
   useEffect(() => {
@@ -128,7 +138,8 @@ const CreatePoint: React.FC = () => {
           <Map
             center={[-23.5116025, -46.8742023]}
             zoom={16}
-            position={[-23.5116025, -46.8742023]}
+            position={selectedPosition}
+            onClick={handleMapClick}
           />
 
           <FieldGroupWrapper>

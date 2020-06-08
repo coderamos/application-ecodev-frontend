@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useEffect, useState, ChangeEvent } from "react";
+
+import axios from "axios";
+import api from "../../services/api";
 
 import {
   Header,
@@ -25,17 +28,64 @@ import {
   Button,
 } from "./styles";
 
-const ufOptions = [
-  { value: 0, description: "selecione o estado" },
-  { value: 1, description: "uf 1" },
-];
+interface Item {
+  id: number;
+  title: string;
+  image_url: string;
+}
 
-const cityOptions = [
-  { value: 0, description: "selecione a cidade" },
-  { value: 1, description: "cidade 1" },
-];
+interface IBGEUFResponse {
+  sigla: string;
+}
+
+interface IBGECityResponse {
+  nome: string;
+}
 
 const CreatePoint: React.FC = () => {
+  const [items, setItems] = useState<Item[]>([]);
+  const [ufs, setUfs] = useState<string[]>([]);
+  const [cities, setCities] = useState<string[]>([]);
+  const [selectedUf, setSelectedUf] = useState<string>("0");
+
+  useEffect(() => {
+    api.get("/items").then((response) => {
+      setItems(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get<IBGEUFResponse[]>(
+        "https://servicodados.ibge.gov.br/api/v1/localidades/estados"
+      )
+      .then((response) => {
+        const ufsInitials = response.data.map((uf) => uf.sigla);
+        setUfs(ufsInitials);
+      });
+  }, []);
+
+  function handleSelectedUf(event: ChangeEvent<HTMLSelectElement>) {
+    const uf = event.target.value;
+    setSelectedUf(uf);
+  }
+
+  useEffect(() => {
+    if (selectedUf === "0") return;
+    axios
+      .get<IBGECityResponse[]>(
+        `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`
+      )
+      .then((response) => {
+        const citiesData = response.data.map((city) => city.nome);
+        setCities(citiesData);
+      });
+  }, [selectedUf]);
+
+  console.log({ selectedUf });
+  console.log({ cities });
+  console.log(cities.length > 0);
+
   return (
     <CreatePointContainer>
       <Header hasBackButtom />
@@ -82,12 +132,23 @@ const CreatePoint: React.FC = () => {
           <FieldGroupWrapper>
             <FieldWrapper>
               <Label htmlFor="uf">estado (uf)</Label>
-              <InputSelect name="uf" id="uf" options={ufOptions} />
+              <InputSelect
+                name="uf"
+                id="uf"
+                options={ufs}
+                value={selectedUf}
+                onChange={handleSelectedUf}
+              />
             </FieldWrapper>
 
             <FieldWrapper>
               <Label htmlFor="city">cidade</Label>
-              <InputSelect name="city" id="city" options={cityOptions} />
+              <InputSelect
+                name="city"
+                id="city"
+                options={cities}
+                disabled={cities.length === 0}
+              />
             </FieldWrapper>
           </FieldGroupWrapper>
         </FormFieldset>
@@ -100,48 +161,13 @@ const CreatePoint: React.FC = () => {
             </FormTextAuxiliary>
           </FormLegendWrapper>
           <List>
-            <ListItemWrapper>
-              <ItemImage
-                src="http://localhost:3333/uploads/oleo.svg"
-                alt="oleo"
-              />
-              <ItemName>Óleo de Cozinha</ItemName>
-            </ListItemWrapper>
-            <ListItemWrapper>
-              <ItemImage
-                src="http://localhost:3333/uploads/oleo.svg"
-                alt="oleo"
-              />
-              <ItemName>Óleo de Cozinha</ItemName>
-            </ListItemWrapper>
-            <ListItemWrapper>
-              <ItemImage
-                src="http://localhost:3333/uploads/oleo.svg"
-                alt="oleo"
-              />
-              <ItemName>Óleo de Cozinha</ItemName>
-            </ListItemWrapper>
-            <ListItemWrapper>
-              <ItemImage
-                src="http://localhost:3333/uploads/oleo.svg"
-                alt="oleo"
-              />
-              <ItemName>Óleo de Cozinha</ItemName>
-            </ListItemWrapper>
-            <ListItemWrapper>
-              <ItemImage
-                src="http://localhost:3333/uploads/oleo.svg"
-                alt="oleo"
-              />
-              <ItemName>Óleo de Cozinha</ItemName>
-            </ListItemWrapper>
-            <ListItemWrapper>
-              <ItemImage
-                src="http://localhost:3333/uploads/oleo.svg"
-                alt="oleo"
-              />
-              <ItemName>Óleo de Cozinha</ItemName>
-            </ListItemWrapper>
+            {items &&
+              items.map((item) => (
+                <ListItemWrapper key={item.id}>
+                  <ItemImage src={item.image_url} alt={item.title} />
+                  <ItemName>{item.title}</ItemName>
+                </ListItemWrapper>
+              ))}
           </List>
         </FormFieldset>
         <Button type="submit">cadastrar ponto de coleta</Button>

@@ -5,20 +5,32 @@ import { SelectWrapper, OptionWrapper } from "./styles";
 interface SelectProps {
   id: string;
   name: string;
-  options: Array<OptionProps>;
+  options: string[];
+  value?: string;
+  onChange?(event: any): any;
+  disabled?: boolean;
 }
 
-interface OptionProps {
-  description: string;
-  value: any;
-}
-
-const InputSelect: React.FC<SelectProps> = ({ name, id, options }) => {
+const InputSelect: React.FC<SelectProps> = ({
+  name,
+  id,
+  options,
+  value,
+  onChange,
+  disabled,
+}) => {
   return (
-    <SelectWrapper name={name} id={id}>
+    <SelectWrapper
+      name={name}
+      id={id}
+      value={value}
+      onChange={onChange}
+      disabled={disabled}
+    >
+      <OptionWrapper value="0">Selecione uma opção</OptionWrapper>
       {options.map((option) => (
-        <OptionWrapper key={option.value} value={option.value}>
-          {option.description}
+        <OptionWrapper key={option} value={option}>
+          {option}
         </OptionWrapper>
       ))}
     </SelectWrapper>

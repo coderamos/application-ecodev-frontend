@@ -58,13 +58,13 @@ const CreatePoint: React.FC = () => {
     0,
     0,
   ]);
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     whatsapp: "",
   });
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
+  const [activeSuccessScreen, setActiveSuccessScreen] = useState<boolean>();
 
   const history = useHistory();
 
@@ -141,12 +141,10 @@ const CreatePoint: React.FC = () => {
       items,
     };
 
-    await api.post("/points", data);
-
-    console.log(data);
-    alert("PONTO DE COLETA CRIADO!");
-
-    history.push("/");
+    history.push("/success");
+    // await api.post("/points", data).then(() => {
+    //   history.push("/success");
+    // });
   }
 
   useEffect(() => {

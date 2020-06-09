@@ -1,5 +1,6 @@
 export const colors = {
   background: "#F0F0F5",
+  backgroundblack: "#0E0A14",
   backgroundhover: "#E1FAEC",
   placeholder: "#A0A0B2",
   primary: "#34CB79",

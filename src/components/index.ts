@@ -4,4 +4,4 @@ import InputSelect from "./inputSelect";
 import Label from "./label";
 import Map from "./map";
 
-export { Header, InputGeneric, Label, InputSelect, Map };
+export { Header, InputGeneric, InputSelect, Label, Map };

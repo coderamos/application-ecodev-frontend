@@ -1,4 +1,5 @@
-import Home from "./home";
 import CreatePoint from "./createPoint";
+import Home from "./home";
+import Success from "./success";
 
-export { Home, CreatePoint };
+export { CreatePoint, Home, Success };

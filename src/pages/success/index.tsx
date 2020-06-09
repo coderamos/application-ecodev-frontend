@@ -8,6 +8,8 @@ import {
   MessageIcon,
 } from "./styles";
 
+import { Button } from "../../components";
+
 const Success: React.FC = () => {
   return (
     <SuccessWrapper>
@@ -16,6 +18,7 @@ const Success: React.FC = () => {
           <FiCheckCircle />
         </MessageIcon>
         <MessageText>SUCESSO!</MessageText>
+        <Button text="cadastre um novo ponto" />
       </SuccessMessageWrapper>
     </SuccessWrapper>
   );

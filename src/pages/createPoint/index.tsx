@@ -51,8 +51,8 @@ const CreatePoint: React.FC = () => {
   const [selectedUf, setSelectedUf] = useState<string>("0");
   const [selectedCity, setSelectedCity] = useState<string>("0");
   const [initialPosition, setInitialPosition] = useState<[number, number]>([
-    0,
-    0,
+    -23.5075111,
+    -46.8749961,
   ]);
   const [selectedPosition, setSelectedPosition] = useState<[number, number]>([
     0,
@@ -64,7 +64,6 @@ const CreatePoint: React.FC = () => {
     whatsapp: "",
   });
   const [selectedItems, setSelectedItems] = useState<number[]>([]);
-  const [activeSuccessScreen, setActiveSuccessScreen] = useState<boolean>();
 
   const history = useHistory();
 
@@ -141,10 +140,9 @@ const CreatePoint: React.FC = () => {
       items,
     };
 
-    history.push("/success");
-    // await api.post("/points", data).then(() => {
-    //   history.push("/success");
-    // });
+    await api.post("/points", data).then(() => {
+      history.push("/success");
+    });
   }
 
   useEffect(() => {
